@@ -127,3 +127,42 @@ const MY_OBJECT = {"key": "value"};
 MY_OBJECT.key = "otherValue";
 
 // 字面量是由语法表达式定义的常量；或，通过由一定字词组成的语词表达式定义的常量
+
+
+// 闭包是 JavaScript 中最强大的特性之一。JavaScript 允许函数嵌套，并且内部函数可以访问定义在外部函数中的所有变量和函数，
+// 以及外部函数能访问的所有变量和函数。但是，外部函数却不能够访问定义在内部函数中的变量和函数。这给内部函数的变量提供了一定的安全性。
+// 此外，由于内部函数可以访问外部函数的作用域，因此当内部函数生存周期大于外部函数时，外部函数中定义的变量和函数将的生存周期比内部函数执行时间长。
+// 当内部函数以某一种方式被任何一个外部函数作用域访问时，一个闭包就产生了.
+
+// 函数的实际参数会被保存在一个类似数组的arguments对象中,arguments变量只是 ”类数组对象“
+
+
+// this
+// 在箭头函数出现之前，每一个新函数都重新定义了自己的 this 值
+// （在严格模式下，一个新的对象在构造函数里是未定义的，以“对象方法”的方式调用的函数是上下文对象等）
+function Person() {
+  var self = this; // Some choose `that` instead of `self`. 
+                   // Choose one and be consistent.
+  self.age = 0;
+
+  setInterval(function growUp() {
+    // The callback refers to the `self` variable of which
+    // the value is the expected object.
+    self.age++;
+  }, 1000);
+}
+// 箭头功能捕捉闭包上下文的this值
+function Person(){
+  this.age = 0;
+
+  setInterval(() => {
+    this.age++; // |this| properly refers to the person object
+  }, 1000);
+}
+
+var p = new Person();
+
+
+// 关系操作符对操作数进行比较，根据比较结果真或假，返回相应的布尔值
+// in操作符， 如果所指定的属性确实存在于所指定的对象中，则会返回true
+// instance of 如果所判别的对象确实是所指定的类型，则返回true
